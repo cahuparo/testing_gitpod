@@ -5,10 +5,11 @@ FROM continuumio/miniconda3
 WORKDIR /workspace
 
 # Update Conda and install Nextflow and nf-core via Bioconda
-RUN conda update -n base -c defaults conda && \
+RUN conda update -n base -c defaults conda -y && \
     conda config --add channels bioconda && \
-    conda create --name nf-core python=3.12 nf-core nextflow && \
-    echo "source activate nf-core" > ~/.bashrc
+    conda config --set channel_priority strict && \
+    conda create --name nf-core python=3.12 nf-core nextflow -y && \
+    echo "conda activate nf-core" >> /etc/bash.bashrc
 
 # Expose the port Nextflow might use for web reports
 EXPOSE 8080
