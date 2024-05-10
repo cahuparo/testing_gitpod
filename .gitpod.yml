@@ -3,9 +3,15 @@ image:
 
 tasks:
   - name: Initialize Conda Environment
-    init: echo "Conda env is ready."
-    command: conda activate nf-core && nextflow run hello
+    init: |
+      echo "Conda env is ready."
+      git clone https://github.com/grunwaldlab/pathogensurveillance.git /workspace/pathogensurveillance
+    command: |
+      conda activate nf-core
+      cd /workspace/pathogensurveillance
+      nextflow run main.nf --help
 
 ports:
   - port: 8080
     onOpen: ignore
+
