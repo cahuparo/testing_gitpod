@@ -1,0 +1,11 @@
+image:
+  file: Dockerfile
+
+tasks:
+  - name: Initialize Conda Environment
+    init: echo "Conda env is ready."
+    command: conda activate nf-core && nextflow run hello
+
+ports:
+  - port: 8080
+    onOpen: ignore
